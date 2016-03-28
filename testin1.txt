@@ -1,0 +1,429 @@
+uses crt;{wefsadfasdf}
+var
+num,a:array[1..20,1..20] of integer;
+-1;
+12-3;
++1;
+asdf+23;
+1.20e-20
+1.3
+1.3e+2e34e-23
+i,j,next,dif:integer;
+key:char;
+fail,win:boolean;
+fo:text;
+re:char;
+procedure show(i:integer);
+begin
+    clrscr; writeln;writeln;writeln;writeln;writeln;writeln;writeln;writeln;
+    if i=1 then writeln('                       **         EASY           **')
+           else writeln('                                  EASY');
+    if i=2 then writeln('                       **         ORDINARILY     **')
+           else writeln('                                  ORDINARILY');
+    if i=3 then writeln('                       **         HARD           **')
+           else writeln('                                  HARD');
+end;
+procedure choose;
+ var
+  v:integer;  s:char;
+ begin
+    v:=1;
+    show(1);
+    while ord(s)<>13 do
+    begin
+        s:=readkey;
+        if ord(s)=80 then
+          begin
+            if v=3 then v:=1 else v:=v+1;
+            show(v);
+          end
+   else if ord(s)=72 then
+          begin
+            if v=1 then v:=3 else v:=v-1;
+            show(v)
+          end
+   else begin show(v); end; {if}
+    end; {while}
+  dif:=v;
+end;
+procedure winner;
+begin
+ if next=0 then win:=true else win:=false;
+end;
+procedure count(ii,jj:integer);
+var
+ k,m,n:integer;
+begin
+
+ if (ii=1) and (jj=1) then
+   begin
+    k:=0;
+    for m:=ii to ii+1 do
+     for n:=jj to jj+1 do
+      if ord(a[m,n]=0)+ord(a[m,n]=3)+ord(a[m,n]=10)+ord(a[m,n]=13)
+          +ord(a[m,n]=100)+ord(a[m,n]=103)+ord(a[m,n]=110)+ord(a[m,n]=113)>=1
+       then k:=k+1; num[ii,jj]:=k;
+   end;
+
+ if (ii=1) and (jj>1) and (jj<20) then
+  begin
+    k:=0;
+    for m:=ii to ii+1 do
+      for n:=jj-1 to jj+1 do
+      if ord(a[m,n]=0)+ord(a[m,n]=3)+ord(a[m,n]=10)+ord(a[m,n]=13)>=1
+        then k:=k+1; num[ii,jj]:=k;
+  end;
+
+ if (ii=1) and (jj=20) then
+  begin
+     k:=0;
+     for m:=ii to ii+1 do
+       for n:=jj-1 to jj do
+          if ord(a[m,n]=0)+ord(a[m,n]=3)+ord(a[m,n]=10)+ord(a[m,n]=13)>=1
+        then k:=k+1; num[ii,jj]:=k;
+  end;
+
+ if (ii>1) and (ii<20) and (jj=1)then
+     begin
+       k:=0;
+       for m:=ii-1 to ii+1 do
+         for n:= jj to jj+1 do
+           if ord(a[m,n]=0)+ord(a[m,n]=3)+ord(a[m,n]=10)+ord(a[m,n]=13)>=1
+       then k:=k+1; num[ii,jj]:=k;
+     end;
+
+ if (ii>1) and (ii<20) and (jj>1) and (jj<20) then
+   begin
+    k:=0;
+    for m:=ii-1 to ii+1 do
+     for n:=jj-1 to jj+1 do
+      if ord(a[m,n]=0)+ord(a[m,n]=3)+ord(a[m,n]=10)+ord(a[m,n]=13)>=1
+       then k:=k+1; num[ii,jj]:=k;
+   end;
+
+ if (ii>1) and (ii<20) and (jj=20) then
+   begin
+    k:=0;
+    for m:=ii-1 to ii+1 do
+      for n:=jj-1 to jj do
+        if ord(a[m,n]=0)+ord(a[m,n]=3)+ord(a[m,n]=10)+ord(a[m,n]=13)>=1
+       then k:=k+1; num[ii,jj]:=k;
+   end;
+ if (ii=20) and (jj=1) then
+    begin
+    k:=0;
+    for m:=ii-1 to ii do
+      for n:=jj to jj+1 do
+       if ord(a[m,n]=0)+ord(a[m,n]=3)+ord(a[m,n]=10)+ord(a[m,n]=13)>=1
+       then k:=k+1; num[ii,jj]:=k;
+    end;
+
+ if (ii=20) and (jj>1) and (jj<20) then
+      begin
+      k:=0;
+      for m:=ii-1 to ii do
+        for n:=jj-1 to jj+1 do
+        if ord(a[m,n]=0)+ord(a[m,n]=3)+ord(a[m,n]=10)+ord(a[m,n]=13)>=1
+       then k:=k+1; num[ii,jj]:=k;
+      end;
+
+ if (ii=20) and (jj=20) then
+     begin
+     k:=0;
+     for m:=ii-1 to ii do
+       for n:=jj-1 to jj do
+         if ord(a[m,n]=0)+ord(a[m,n]=3)+ord(a[m,n]=10)+ord(a[m,n]=13)>=1
+       then k:=k+1; num[ii,jj]:=k;
+     end;
+end;
+procedure make;
+var
+m,n,zz:integer;
+begin
+ randomize;
+ for m:=1 to 20 do
+   for n:=1 to 20 do
+     begin
+       zz:=random(100);
+         case dif of
+          1:begin  if zz<8 then begin a[m,n]:=0; next:=next+1; end else a[m,n]:=1; end;
+          2:begin  if zz<16 then begin a[m,n]:=0; next:=next+1; end else a[m,n]:=1; end;
+          3:begin  if zz<21 then begin a[m,n]:=0; next:=next+1; end else a[m,n]:=1; end;
+          end;
+     end;
+end;
+ 
+procedure dig(mm,nn:integer);
+  var
+    m1,m2,n1,n2,m3,n3,m,n:integer;
+    aa:array[1..20,1..20] of boolean;
+  begin
+    if num[mm,nn]=0 then
+    begin
+     if (mm=1) and (nn=1) then
+       begin
+        for m:=mm to mm+1 do
+        for n:=nn to nn+1 do
+             begin
+              count(m,n);a[m,n]:=2;
+             end;
+       end;
+    if (mm=1) and (nn>1) and (nn<20) then
+       begin
+        for m:=mm to mm+1 do
+        for n:=nn-1 to nn+1 do
+             begin
+              count(m,n);a[m,n]:=2;
+             end;
+       end;
+    if (mm=1) and (nn=20) then
+       begin
+        for m:=mm to mm+1 do
+        for n:=nn-1 to nn do
+             begin
+              count(m,n);a[m,n]:=2;
+             end;
+       end;
+    if (mm>1) and (mm<20) and (nn=1) then
+       begin
+        for m:=mm-1 to mm+1 do
+        for n:=nn to nn+1 do
+             begin
+              count(m,n);a[m,n]:=2;
+             end;
+       end;
+    if (mm>1) and (mm<20) and (nn>1) and (nn<20) then
+       begin
+        for m:=mm-1 to mm+1 do
+        for n:=nn-1 to nn+1 do
+             begin
+              count(m,n);a[m,n]:=2;
+             end;
+       end;
+    if (mm>1) and (mm<20) and (nn=20) then
+       begin
+        for m:=mm-1 to mm+1 do
+        for n:=nn-1 to nn do
+             begin
+              count(m,n);a[m,n]:=2;
+             end;
+       end;
+    if (mm=20) and (nn=1) then
+       begin
+        for m:=mm-1 to mm do
+        for n:=nn to nn+1 do
+             begin
+              count(m,n);a[m,n]:=2;
+             end;
+       end;
+    if (mm=20) and (nn>1) and (nn<20) then
+       begin
+        for m:=mm to mm+1 do
+        for n:=nn-1 to nn+1 do
+             begin
+              count(m,n);a[m,n]:=2;
+             end;
+       end;
+    if (mm=20) and (nn=20) then
+       begin
+        for m:=mm-1 to mm do
+        for n:=nn-1 to nn do
+             begin
+              count(m,n);a[m,n]:=2;
+             end;
+       end;
+    end;
+  end;
+procedure code;
+  var
+    co:string;
+    mm,nn:integer;
+  begin
+   writeln('Please type in the code');
+   readln(co);
+    if co='black sheep wall' then
+       begin
+        for mm:=1 to 20 do
+          for nn:=1 to 20 do
+              a[mm,nn]:=a[mm,nn]+100;
+       end
+    else exit;
+  end;
+ 
+procedure  print;
+var
+ii,jj:integer;
+begin
+clrscr;
+writeln ('up_key:up , down_key:down , left_key:left , right_key:right  e:open    r:size    enter:enter  q:exit');
+for ii:=1 to 20 do
+  begin
+  for jj:=1 to 20 do
+    case a[ii,jj] of
+     0:write({fo,}'*'{'0'},' ');                                              {full,close}
+     1:write({fo,}'*'{'1'},' ');                                              {empty,close}
+     2: if num[ii,jj]=0 then write('  ') else write({fo,}num[ii,jj],' ');     {empty,open}
+     3:write({fo,}chr(1),' ');                                                {full,size}
+     4:write({fo,}chr(2),' ');                                                {full,open}
+     5:write({fo,}chr(1),' ');                                                {entpy,size}
+
+      10:write({fo,}'*'{'0'},'<');                                             {full,close,<}
+     11:write({fo,}'*','<');                                                  {empty,close,<}
+     12:if num[ii,jj]=0 then write(' <') else write({fo,}num[ii,jj],'<');     {empey,open,<}
+     13:write({fo,}chr(1),'<');                                               {full,size,<}
+     14:write({fo,}chr(2),'<');                                               {full,open,<}
+     15:write({fo,}chr(1),'<');                                               {empty,size,<}
+     100:write({fo,}chr(15){'0'},' ');                                          {full,close,code}
+     101:write({fo,}'*'{'1'},' ');                                              {empty,close,code}
+     102: if num[ii,jj]=0 then write('  ') else write({fo,}num[ii,jj],' ');     {empty,open,code}
+     103:write({fo,}chr(1),' ');                                                {full,size,code}
+     104:write({fo,}chr(2),' ');                                                {full,open,code}
+     105:write({fo,}chr(1),' ');                                                {entpy,size,code}
+     110:write({fo,}chr(15){'0'},'<');                                          {full,close,<,code}
+     111:write({fo,}'*','<');                                                  {empty,close,<,code}
+     112:if num[ii,jj]=0 then write(' <') else write({fo,}num[ii,jj],'<');     {empey,open,<,code}
+     113:write({fo,}chr(1),'<');                                               {full,size,<,code}
+     114:write({fo,}chr(2),'<');                                               {full,open,<,code}
+     115:write({fo,}chr(1),'<');                                               {empty,size,<,code}
+    end;
+  writeln{(fo)};
+  end;
+  end;
+procedure change(y:char);
+ var
+ k:integer;
+ begin
+ case ord(y) of
+ 72: begin
+       a[i,j]:=a[i,j]-10;
+       i:=i-1;if i<1 then i:=20;
+       a[i,j]:=a[i,j]+10;
+      exit;
+      end;
+ 75:begin
+       a[i,j]:=a[i,j]-10;
+       j:=j-1;if j<1 then j:=20;
+       a[i,j]:=a[i,j]+10;
+       exit;
+      end;
+ 80:begin
+       a[i,j]:=a[i,j]-10;
+       i:=i+1;if i>20 then i:=1;
+       a[i,j]:=a[i,j]+10;
+       exit;
+      end;
+ 77:begin
+       a[i,j]:=a[i,j]-10;
+       j:=j+1; if j>20 then j:=1;
+       a[i,j]:=a[i,j]+10;
+       exit;
+      end;
+ 101:case a[i,j] of    {make it open}
+      10:begin
+         a[i,j]:=14;
+         fail:=true;
+         exit;
+        end;
+      11:begin
+         count(i,j);
+         dig(i,j);
+         a[i,j]:=12;
+         exit;
+        end;
+      110:begin
+         a[i,j]:=114;
+         fail:=true;
+         exit;
+        end;
+      111:begin
+         count(i,j);
+         dig(i,j);
+         a[i,j]:=112;
+         exit;
+        end;
+     end;
+ 114:case a[i,j] of      {size it}
+      10:begin
+        a[i,j]:=13;
+        next:=next-1;
+        exit;
+        end;
+      11:begin a[i,j]:=15;  exit; end;
+      13:begin
+          a[i,j]:=10;
+          next:=next+1;
+          exit;
+          end;
+      15: begin a[i,j]:=11; exit; end;
+      110:begin
+        a[i,j]:=113;
+        next:=next-1;
+        exit;
+        end;
+      111:begin a[i,j]:=115;  exit; end;
+      113:begin
+          a[i,j]:=110;
+          next:=next+1;
+          exit;
+         end;
+      115: begin a[i,j]:=111; exit; end;
+     end;
+ 113:fail:=true;
+ 107:code;
+ end;
+end;
+
+procedure youwin;
+begin
+writeln('     ****         ****         ****         ***        *****     *****');
+writeln('      ****       ******       ****          ***         *****     ***');
+writeln('       ****     ********     ****                       *** **    ***');
+writeln('        ****   ****  ****   ****           *****        ***  **   ***');
+writeln('         **** ****    **** ****             ***         ***   **  ***');
+writeln('          *******      *******              ***         ***    ** ***');
+writeln('           *****        *****               ***         ***     *****');
+writeln('            ***          ***               *****       *****     *****');
+end;
+procedure  youfail;
+begin
+writeln('     *********         ***               *        *');
+writeln('     *                *   *              *        *');
+writeln('     *               *     *                      *');
+writeln('     *********      *       *            *        *');
+writeln('     *             ***********           *        *');
+writeln('     *            *           *          *        *');
+writeln('     *           *             *         *        *');
+writeln('     *          *               *        *        ***********');
+ 
+end;
+
+begin
+ repeat
+ randomize;
+ fail:=false;
+ next:=0;
+ {for i:=1 to 20 do
+ for j:=1 to 20 do
+ a[i,j]:=1;         }
+ writeln('---------------------D.A.SOFT--------------------');
+ writeln('----------------Sao Di Lei-----------------------');
+ writeln{(fo)};
+ choose;
+ make;
+ i:=1;j:=1;
+ a[1,1]:=11;
+ print;
+ repeat
+ key:=readkey;
+ change(key);
+ print;
+ writeln{(fo)};
+ writeln('There is', next,' have not been found');
+ winner;
+ until (win=true) or  (fail=true);
+ if win=true then youwin
+             else youfail;
+ writeln('DO YOU WANT TO PLAY AGAIN?[Y/N]');
+ re:=readkey;
+ UNTIL RE='n';
+ end.

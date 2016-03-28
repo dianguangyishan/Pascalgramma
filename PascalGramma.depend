@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1459141701 source:f:\personalplace\pascalgramma\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"trie.h"
+
+1459141457 f:\personalplace\pascalgramma\trie.h
+	<stdio.h>
+	<stdlib.h>
+
